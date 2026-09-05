@@ -1,0 +1,10 @@
+Organisation,Partner,Field_Name,Sample_Value,Expected_Type,Expected_Masking,Access_Role,Actual_Value
+FinA,PayX,email,kavya@gmail.com,Email,k***@gmail.com,Analyst,k***@gmail.com
+FinA,PayX,phone,9876543210,Phone,******3210,Manager,9876543210
+FinA,PayX,card_number,4532123412345678,Card,************5678,Analyst,4532123412345678
+FinA,PayX,amount,5000,Normal,None,Analyst,5000
+FinB,PayY,cust_mail,test@gmail.com,Email,t***@gmail.com,Analyst,t***@gmail.com
+FinB,PayY,mobile_no,9123456780,Phone,******6780,Manager,******6780
+FinB,PayY,cc_no,4532987654321234,Card,************1234,Manager,************1234
+FinC,PayZ,cust_nm,Kavya,Name,K***,Admin,Kavya
+FinC,PayZ,customer_email,newuser@gmail.com,Email,n***@gmail.com,Guest,n***@gmail.com

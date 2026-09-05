@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sensitive Data Validator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="topbar">
+
+        <div class="brand">
+            <div class="brand-icon">🔐</div>
+
+            <div>
+                <h1>Sensitive Data Validator</h1>
+                <p>Security & Data Protection Platform</p>
+            </div>
+        </div>
+
+        <div class="system-status">
+            <span class="status-dot"></span>
+            System Active
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <span class="badge">
+                    🛡️ SECURITY VALIDATION
+                </span>
+
+                <h2>
+                    Protect Sensitive Data<br>
+                    Before Publication
+                </h2>
+
+                <p>
+                    Detect sensitive information, validate masking,
+                    verify access permissions and prevent unauthorized
+                    analytics publication.
+                </p>
+
+                <button class="primary-btn" onclick="showValidator()">
+                    Start Validation
+                    <span>→</span>
+                </button>
+
+            </div>
+
+            <div class="hero-security">
+
+                <div class="security-circle">
+                    🔒
+                </div>
+
+                <h3>Data Security</h3>
+
+                <p>
+                    Detect • Protect • Validate
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- METRICS -->
+        <section class="section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">PERFORMANCE</span>
+                    <h2>Security Metrics</h2>
+                </div>
+
+                <p>Current validation performance</p>
+
+            </div>
+
+
+            <div class="cards">
+
+                <div class="metric-card">
+
+                    <div class="metric-icon">
+                        📊
+                    </div>
+
+                    <div>
+                        <h3>87.5%</h3>
+                        <p>Baseline Accuracy</p>
+                    </div>
+
+                </div>
+
+
+                <div class="metric-card">
+
+                    <div class="metric-icon">
+                        🎯
+                    </div>
+
+                    <div>
+                        <h3>100%</h3>
+                        <p>Hybrid Accuracy</p>
+                    </div>
+
+                </div>
+
+
+                <div class="metric-card">
+
+                    <div class="metric-icon">
+                        📈
+                    </div>
+
+                    <div>
+                        <h3>+12.5%</h3>
+                        <p>Improvement</p>
+                    </div>
+
+                </div>
+
+
+                <div class="metric-card">
+
+                    <div class="metric-icon">
+                        🛡️
+                    </div>
+
+                    <div>
+                        <h3>62.5%</h3>
+                        <p>Protection Rate</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- VALIDATOR -->
+        <section id="validator" class="validator-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">VALIDATION ENGINE</span>
+                    <h2>Field Validation</h2>
+                </div>
+
+                <p>
+                    Enter field details to perform security validation
+                </p>
+
+            </div>
+
+
+            <div class="validator-card">
+
+            <form id="validationForm">
+
+    <!-- ROW 1 -->
+
+    <div class="form-group">
+        <label for="organisation">Organisation</label>
+
+        <input
+            type="text"
+            id="organisation"
+            placeholder="e.g. FinA"
+            required
+        >
+    </div>
+
+
+    <div class="form-group">
+        <label for="partner">Partner</label>
+
+        <input
+            type="text"
+            id="partner"
+            placeholder="e.g. PayX"
+            required
+        >
+    </div>
+
+
+    <!-- ROW 2 -->
+
+    <div class="form-group">
+        <label for="field_name">Field Name</label>
+
+        <input
+            type="text"
+            id="field_name"
+            placeholder="e.g. email"
+            required
+        >
+    </div>
+
+
+    <div class="form-group">
+        <label for="sample_value">Sample Value</label>
+
+        <input
+            type="text"
+            id="sample_value"
+            placeholder="e.g. kavya@gmail.com"
+            required
+        >
+    </div>
+
+
+    <!-- ROW 3 -->
+
+    <div class="form-group">
+        <label for="expected_type">Expected Type</label>
+
+        <select id="expected_type" required>
+
+            <option value="">Select Data Type</option>
+
+            <option value="Email">Email</option>
+
+            <option value="Phone">Phone</option>
+
+            <option value="Card">Card</option>
+
+            <option value="Name">Name</option>
+
+            <option value="Normal">Normal</option>
+
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label for="expected_masking">Expected Masking</label>
+
+        <input
+            type="text"
+            id="expected_masking"
+            placeholder="e.g. k***@gmail.com"
+            required
+        >
+    </div>
+
+
+    <!-- ROW 4 -->
+
+    <div class="form-group">
+        <label for="access_role">Access Role</label>
+
+        <select id="access_role" required>
+
+            <option value="">Select Access Role</option>
+
+            <option value="Analyst">Analyst</option>
+
+            <option value="Manager">Manager</option>
+
+            <option value="Admin">Admin</option>
+
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label for="actual_value">Actual Value</label>
+
+        <input
+            type="text"
+            id="actual_value"
+            placeholder="Enter actual value"
+            required
+        >
+    </div>
+
+
+    <!-- VALIDATE BUTTON -->
+
+     <button type="submit" class="validate-btn">
+    🔍 Validate Field
+</button>
+</form>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESULT -->
+        <section id="result" class="result-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">SECURITY RESULT</span>
+                    <h2>Validation Result</h2>
+                </div>
+
+            </div>
+
+
+            <div class="result-card">
+
+                <div id="resultContent">
+
+                    <div class="empty-result">
+
+                        <div class="empty-icon">
+                            🔎
+                        </div>
+
+                        <h3>Ready for Validation</h3>
+
+                        <p>
+                            Enter field details above and click
+                            <strong>Validate Field</strong>.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div>
+            <strong>🔐 Sensitive Data Validator</strong>
+            <span> | Secure Analytics Publication</span>
+        </div>
+
+        <p>
+            © 2026 Sensitive Data Validator
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
