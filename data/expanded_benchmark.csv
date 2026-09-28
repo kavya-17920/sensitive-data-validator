@@ -1,0 +1,69 @@
+Organisation,Partner,Field_Name,Sample_Value,Expected_Type,Expected_Masking,Access_Role,Actual_Value
+FinBank US,PayCore,email,john.doe@gmail.com,Email,j***@gmail.com,Analyst,j***@gmail.com
+FinBank US,PayCore,phone,4155552671,Phone,******2671,Analyst,******2671
+FinBank US,PayCore,card_number,4111111111111111,Card,************1111,Manager,************1111
+FinBank US,PayCore,full_name,Sarah Connor,Name,S***,Analyst,S***
+FinBank US,PayCore,amount,2500.00,Normal,None,Analyst,2500.00
+RetailCo,CardVault,email,alice.smith@yahoo.com,Email,a***@yahoo.com,Manager,a***@yahoo.com
+RetailCo,CardVault,phone,9876543210,Phone,******3210,Analyst,******3210
+RetailCo,CardVault,card_number,5500005555555559,Card,************5559,Manager,************5559
+RetailCo,CardVault,customer_name,Robert Brown,Name,R***,Analyst,R***
+RetailCo,CardVault,transaction_id,TXN20240912,Normal,None,Admin,TXN20240912
+EuroBank,EUPay,email,hans.mueller@web.de,Email,h***@web.de,Analyst,h***@web.de
+EuroBank,EUPay,email,claire.dupont@orange.fr,Email,c***@orange.fr,Analyst,c***@orange.fr
+EuroBank,EUPay,email,james.wright@bbc.co.uk,Email,j***@bbc.co.uk,Manager,j***@bbc.co.uk
+EuroBank,EUPay,email,info@fintech.eu,Email,i***@fintech.eu,Analyst,i***@fintech.eu
+EuroBank,EUPay,phone,+447700900123,Phone,******0123,Analyst,******0123
+EuroBank,EUPay,phone,07700900456,Phone,******0456,Manager,******0456
+IndiaFinServ,UPIGateway,phone,9123456780,Phone,******6780,Analyst,******6780
+IndiaFinServ,UPIGateway,phone,6789012345,Phone,******2345,Analyst,******2345
+ChinaPay,AliLink,phone,13812345678,Phone,******5678,Manager,******5678
+ChinaPay,AliLink,phone,15987654321,Phone,******4321,Analyst,******4321
+EuroBank,AmexPartner,card_number,378282246310005,Card,***********0005,Manager,***********0005
+EuroBank,AmexPartner,card_number,371449635398431,Card,***********8431,Analyst,***********8431
+GlobalPay,IntlRemit,customer_name,Jean-Pierre Dubois,Name,J***,Analyst,J***
+GlobalPay,IntlRemit,customer_name,María García,Name,M***,Manager,M***
+GlobalPay,IntlRemit,customer_name,Siobhán O'Brien,Name,S***,Analyst,S***
+GlobalPay,IntlRemit,email,jose.garcia@correo.es,Email,j***@correo.es,Analyst,j***@correo.es
+GlobalPay,IntlRemit,customer_name,Müller Hans,Name,M***,Analyst,M***
+GlobalPay,IntlRemit,customer_name,Björn Åberg,Name,B***,Manager,B***
+NoisyCorp,TrickyAPI,usr_email_addr,bob.hope@outlook.com,Email,b***@outlook.com,Analyst,b***@outlook.com
+NoisyCorp,TrickyAPI,contact_phone_num,8005551234,Phone,******1234,Analyst,******1234
+NoisyCorp,TrickyAPI,payment_card_id,4916338506082832,Card,************2832,Manager,************2832
+NoisyCorp,TrickyAPI,client_name_full,Priya Sharma,Name,P***,Analyst,P***
+NoisyCorp,TrickyAPI,reference,9876543210123456,Card,************3456,Analyst,************3456
+NoisyCorp,TrickyAPI,reference,8005559876,Phone,******9876,Manager,******9876
+NoisyCorp,TrickyAPI,notes,,Normal,None,Analyst,
+NoisyCorp,TrickyAPI,description,,Email,None,Analyst,
+NoisyCorp,TrickyAPI,id,4532015112830366,Card,************0366,Analyst,************0366
+NoisyCorp,TrickyAPI,data,hidden.user@domain.com,Email,h***@domain.com,Manager,h***@domain.com
+NoisyCorp,TrickyAPI,record_value,,Phone,None,Analyst,
+MaskFail,BadMasker,email,carol.white@gmail.com,Email,c***@gmail.com,Analyst,carol.white@gmail.com
+MaskFail,BadMasker,phone,3125559988,Phone,******9988,Analyst,3125559988
+MaskFail,BadMasker,card_number,4012888888881881,Card,************1881,Manager,4012888888881000
+MaskFail,BadMasker,full_name,David Lee,Name,D***,Analyst,David Lee
+MaskFail,BadMasker,email,support@company.com,Email,s***@company.com,Manager,support@company.com
+MaskFail,BadMasker,phone,7185554433,Phone,******4433,Analyst,718-555-4433
+MaskFail,BadMasker,card_number,5425233430109903,Card,************9903,Manager,****233430109903
+MaskFail,BadMasker,full_name,Emma Watson,Name,E***,Analyst,Emma W.
+MaskFail,BadMasker,email,noreply@bank.io,Email,n***@bank.io,Analyst,noreply@bank.io
+MaskFail,BadMasker,phone,4085556677,Phone,******6677,Manager,408*556677
+AccessCtrl,RoleTest,email,frank.ocean@music.com,Email,f***@music.com,Guest,frank.ocean@music.com
+AccessCtrl,RoleTest,phone,6265558899,Phone,******8899,Guest,6265558899
+AccessCtrl,RoleTest,card_number,4111111111111111,Card,************1111,Guest,4111111111111111
+AccessCtrl,RoleTest,full_name,Grace Hopper,Name,G***,Guest,Grace Hopper
+AccessCtrl,RoleTest,email,admin@corp.net,Email,a***@corp.net,Admin,admin@corp.net
+AccessCtrl,RoleTest,phone,2025551234,Phone,******1234,Admin,2025551234
+AccessCtrl,RoleTest,card_number,5425233430109903,Card,************9903,Admin,5425233430109903
+AccessCtrl,RoleTest,full_name,Irene Adler,Name,I***,Analyst,I***
+AccessCtrl,RoleTest,card_number,4532015112830366,Card,************0366,Manager,4532015112830366
+SchemaDrift,NestedFlow,payload.user.email,wendy.mills@proton.me,Email,w***@proton.me,Analyst,w***@proton.me
+SchemaDrift,NestedFlow,data.contact.phone,9001234567,Phone,******4567,Manager,******4567
+SchemaDrift,NestedFlow,body.card.number,4916338506082832,Card,************2832,Manager,************2832
+SchemaDrift,NestedFlow,meta.owner.name,Xavier Nolan,Name,X***,Analyst,X***
+SchemaDrift,NestedFlow,emailAddress,yvonne.b@hotmail.com,Email,y***@hotmail.com,Analyst,y***@hotmail.com
+SchemaDrift,NestedFlow,phoneNumber,8559876543,Phone,******6543,Analyst,******6543
+SchemaDrift,NestedFlow,cardNo,5105105105105100,Card,************5100,Manager,************5100
+SchemaDrift,NestedFlow,EmailAddr,zoe.r@enterprise.org,Email,z***@enterprise.org,Analyst,z***@enterprise.org
+SchemaDrift,NestedFlow,PHONE_NUM,5125554321,Phone,******4321,Analyst,******4321
+SchemaDrift,NestedFlow,CardNumber,4539578763621486,Card,************1486,Manager,************1486

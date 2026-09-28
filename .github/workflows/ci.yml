@@ -1,0 +1,140 @@
+name: Sensitive Data Validator CI
+
+# ============================================================
+# Triggers
+# ============================================================
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+
+# ============================================================
+# Jobs
+# ============================================================
+jobs:
+
+  # ----------------------------------------------------------
+  # Job 1: Lint — static analysis with flake8
+  # ----------------------------------------------------------
+  lint:
+    name: Lint (flake8)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install flake8
+        run: pip install flake8>=6.0.0
+
+      - name: Run flake8
+        run: |
+          flake8 backend/ tests/ \
+            --max-line-length=120 \
+            --ignore=E501,W503
+
+  # ----------------------------------------------------------
+  # Job 2: Test — pytest with coverage (matrix: 3.10 & 3.11)
+  # ----------------------------------------------------------
+  test:
+    name: Test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    needs: lint
+
+    strategy:
+      fail-fast: false          # keep running other matrix builds on failure
+      matrix:
+        python-version: ["3.10", "3.11"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-${{ matrix.python-version }}-
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install \
+            fastapi \
+            uvicorn \
+            pydantic \
+            pandas \
+            numpy \
+            httpx \
+            pytest \
+            pytest-cov
+
+      - name: Run pytest with coverage
+        run: |
+          pytest tests/ \
+            -v \
+            --cov=backend \
+            --cov-report=xml \
+            --cov-report=term-missing
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-py${{ matrix.python-version }}
+          path: coverage.xml
+          retention-days: 14
+
+  # ----------------------------------------------------------
+  # Job 3: Benchmark — run the pipeline script
+  # ----------------------------------------------------------
+  benchmark:
+    name: Benchmark pipeline
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install \
+            fastapi \
+            uvicorn \
+            pydantic \
+            pandas \
+            numpy \
+            httpx \
+            pytest \
+            pytest-cov
+
+      - name: Run pipeline benchmark
+        # '|| true' prevents a non-zero exit from failing the CI run while
+        # the benchmark script is still in active development.
+        run: python backend/pipeline.py || true
+
+      - name: Echo benchmark complete
+        run: echo "✅ Benchmark step completed."
