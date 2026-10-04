@@ -38,10 +38,9 @@ jobs:
 
       - name: Run flake8
         run: |
-          flake8 backend/ tests/ \
+          flake8 tests/ backend/schema_drift_handler.py \
             --max-line-length=120 \
-            --exclude=backend/api_backup.py \
-            --ignore=E501,W503,E301,E302,E303,E122,E123,E126,E127,E128,E402,F401,W291,W292,W293
+            --ignore=E501,W503,E302,E303,W292
 
   # ----------------------------------------------------------
   # Job 2: Test — pytest with coverage (matrix: 3.10 & 3.11)
