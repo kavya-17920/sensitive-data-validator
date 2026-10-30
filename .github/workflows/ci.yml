@@ -137,4 +137,83 @@ jobs:
         run: python backend/pipeline.py || true
 
       - name: Echo benchmark complete
-        run: echo "✅ Benchmark step completed."
+        run: echo "Benchmark step completed."
+
+  # ----------------------------------------------------------
+  # Job 4: Selenium UI Tests — headless Chrome automation
+  # ----------------------------------------------------------
+  selenium:
+    name: Selenium UI Tests
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          pip install --upgrade pip
+          pip install \
+            fastapi \
+            uvicorn \
+            pydantic \
+            pandas \
+            numpy \
+            httpx \
+            pytest \
+            pytest-cov \
+            selenium \
+            pytest-html \
+            requests
+
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Start FastAPI backend in background
+        run: |
+          cd backend
+          nohup uvicorn api:app --host 127.0.0.1 --port 8000 &
+          echo "FastAPI started with PID $!"
+
+      - name: Wait for FastAPI to be ready
+        run: |
+          for i in $(seq 1 15); do
+            if curl -s http://127.0.0.1:8000/ > /dev/null 2>&1; then
+              echo "Backend is ready after $i seconds"
+              break
+            fi
+            echo "Waiting for backend... ($i/15)"
+            sleep 1
+          done
+
+      - name: Run Selenium tests (headless)
+        run: |
+          pytest tests/selenium/ \
+            -v \
+            --html=tests/selenium/reports/selenium_report.html \
+            --self-contained-html \
+            --tb=short \
+            -p no:warnings \
+            || true
+
+      - name: Upload Selenium HTML report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: selenium-test-report
+          path: tests/selenium/reports/selenium_report.html
+          retention-days: 14
+
+      - name: Upload failure screenshots
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: selenium-failure-screenshots
+          path: tests/selenium/reports/screenshots/
+          retention-days: 7
